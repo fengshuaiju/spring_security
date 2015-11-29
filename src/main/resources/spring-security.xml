@@ -20,7 +20,7 @@
      	
     </security:http>
    
-     <!-- 另一种方式
+     <!-- 另一种方式   
     <security:http auto-config="true">
       <security:form-login login-page="/login.jsp"
          login-processing-url="/login.do" username-parameter="username"

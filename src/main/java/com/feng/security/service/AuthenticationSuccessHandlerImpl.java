@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * 登录成功后调用此类
  * @author Administrator
  *
- */
+ */  
 @Component
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
 
