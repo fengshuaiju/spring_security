@@ -7,10 +7,32 @@
           http://www.springframework.org/schema/security
           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
  
-   <security:http auto-config="true">
-      <security:intercept-url pattern="/**" access="ROLE_ADMIN"/>
-   </security:http>    
-  
+ 	<security:http security="none" pattern="/login.jsp" />
+ 	<security:http security="none" pattern="/fail.jsp" />
+    <security:http auto-config="true">
+    	<security:intercept-url pattern="/**" access="ROLE_USER" />
+     	
+     	<security:form-login login-page="/login.jsp" login-processing-url="/login.do" 
+     	password-parameter="password" username-parameter="username"
+     	authentication-success-handler-ref="authenticationSuccessHandlerImpl"
+     	authentication-failure-url="/fail.jsp"
+     	/>
+     	
+    </security:http>
+   
+     <!-- 另一种方式
+    <security:http auto-config="true">
+      <security:form-login login-page="/login.jsp"
+         login-processing-url="/login.do" username-parameter="username"
+         password-parameter="password"
+         authentication-failure-url="/fail.jsp"
+         />
+      <security:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+      <security:intercept-url pattern="/fail.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+      <security:intercept-url pattern="/**" access="ROLE_USER" />
+   </security:http>
+    --> 
+    
    <security:authentication-manager>
       <security:authentication-provider>
          <security:user-service>
