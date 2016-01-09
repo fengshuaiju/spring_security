@@ -28,7 +28,6 @@
       <property name="password" value="123456"/>
    </bean>
    
-<!--    <jpa:repositories base-package="com.acme.repositories"/> -->
+   <jpa:repositories base-package="com.feng.repositories"/>
 
-   
 </beans>
