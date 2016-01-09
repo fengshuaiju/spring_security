@@ -1,5 +1,9 @@
 package com.feng.controller;
 
+import java.net.URLClassLoader;
+import java.util.Arrays;
+
+import org.jboss.jandex.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,9 +24,11 @@ public class ModelController {
 	private ModelService modelService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public String sayHello(Model model,Pageable page){
-		Page<ModelEntity> say = modelService.findAll(page);
-		model.addAttribute("say",say);
+	public String sayHello(){
+		Page<ModelEntity> say = modelService.findAll();
+		ModelEntity entity = modelService.findById(1L);
+		System.out.println(entity);
+		//model.addAttribute("say",say);
 		return "hello/hello";
 	}
 	
@@ -50,5 +56,8 @@ public class ModelController {
 		modelService.delete(modelId);
 		return null;
 	}
-	
+	public static void main(String[] args) {
+        URLClassLoader classLoader = (URLClassLoader)Main.class.getClassLoader();
+        System.out.println(Arrays.toString(classLoader.getURLs()));
+}
 }

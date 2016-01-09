@@ -6,6 +6,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <body>
 <h2>Hello World!!!</h2>
-<a href="<%=basePath%>sayHello">click me</a>
+<a href="<%=basePath%>api/model">click me</a>
 </body>
 </html>

@@ -11,17 +11,19 @@ import com.feng.service.ModelService;
 
 @Service
 public class ModelServiceImpl implements ModelService{
+	
+	@Autowired
+	private ModelRepositorie modelRepositorie;
 
 	@Override
-	public Page<ModelEntity> findAll(Pageable page) {
+	public Page<ModelEntity> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ModelEntity findById(Long modelId) {
-		// TODO Auto-generated method stub
-		return null;
+		return modelRepositorie.findOne(modelId);
 	}
 
 	@Override
