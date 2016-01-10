@@ -18,6 +18,9 @@ public class ModelEntity {
 	@Column(name="name")
 	private String name;
 	
+	@Column(name="removemark")
+	private boolean removemark;
+	
 	public Long getId() {
 		return id;
 	}
@@ -33,5 +36,12 @@ public class ModelEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public boolean isRemovemark() {
+		return removemark;
+	}
+
+	public void setRemovemark(boolean removemark) {
+		this.removemark = removemark;
+	}
 }

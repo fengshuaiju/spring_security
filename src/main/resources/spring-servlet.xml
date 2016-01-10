@@ -8,18 +8,13 @@
     xsi:schemaLocation="
         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util-3.0.xsd
-        http://www.springframework.org/schema/beans 
-        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-3.0.xsd
-        http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd" >
+         http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd" >
        
-    <!--
-	  	<context:annotation-config />
-	    <context:component-scan base-package="com.feng"/>
-    -->
-     
     <context:annotation-config />    
     <context:component-scan base-package="com.feng" annotation-config="true" />
     
@@ -29,5 +24,17 @@
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    
+    <mvc:annotation-driven>
+    	<mvc:argument-resolvers>
+    		<bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver" />
+    	</mvc:argument-resolvers>
+    	<mvc:message-converters>
+    		<bean class="org.springframework.http.converter.StringHttpMessageConverter"></bean>
+    		<bean class="org.springframework.http.converter.ResourceHttpMessageConverter"></bean>
+    		<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+    		</bean>
+    	</mvc:message-converters>
+    </mvc:annotation-driven>
     
 </beans>

@@ -7,39 +7,29 @@
           http://www.springframework.org/schema/security
           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
  
- 	<security:http security="none" pattern="/login.jsp" />
- 	<security:http security="none" pattern="/fail.jsp" />
-    <security:http auto-config="true">
-    	<security:intercept-url pattern="/**" access="ROLE_USER" />
-     	
-     	<security:form-login login-page="/login.jsp" login-processing-url="/login.do" 
-     	password-parameter="password" username-parameter="username"
-     	authentication-success-handler-ref="authenticationSuccessHandlerImpl"
-     	authentication-failure-url="/fail.jsp"
-     	/>
-     	
-    </security:http>
+	<security:http auto-config="true" access-denied-page="/fail.jsp"><!-- 当访问被拒绝时，会转到403.jsp -->
+		<security:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/fail.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<!-- 制定登录页面等 -->
+		<security:form-login login-page="/login.jsp"  
+             authentication-failure-url="/login.jsp?error=true"
+             username-parameter="username"
+             password-parameter="password"
+             login-processing-url="/login.do"
+             default-target-url="/index.jsp" />
+             
+        <security:logout logout-success-url="/login.jsp" /> 
+        
+    	<security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
+    	
+    </security:http> 
    
-     <!-- 另一种方式   
-    <security:http auto-config="true">
-      <security:form-login login-page="/login.jsp"
-         login-processing-url="/login.do" username-parameter="username"
-         password-parameter="password"
-         authentication-failure-url="/fail.jsp"
-         />
-      <security:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-      <security:intercept-url pattern="/fail.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-      <security:intercept-url pattern="/**" access="ROLE_USER" />
-   </security:http>
-    --> 
-    
-   <security:authentication-manager>
-      <security:authentication-provider>
-         <security:user-service>
-            <security:user name="user" password="user" authorities="ROLE_USER"/>
-            <security:user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN"/>
-         </security:user-service>
-      </security:authentication-provider>
-   </security:authentication-manager>
-       
+      <security:authentication-manager alias="authenticationManager">
+      	<security:authentication-provider ref="loginAuthenticationProvider">
+      	</security:authentication-provider>
+	   </security:authentication-manager>
+	   
+	   <bean id="loginAuthenticationProvider" class="com.feng.security.service.LoginAuthenticationProvider">  
+        <property name="userDetailsService" ref="loginUserDetailsServiceImpl"></property>  
+    </bean>  
 </beans>

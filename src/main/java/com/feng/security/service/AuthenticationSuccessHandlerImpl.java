@@ -21,7 +21,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		System.out.println("我登录成功了！！！！！！");
+		System.out.println("我登录成 功了！！！！！！");
 		response.sendRedirect(request.getContextPath());
 	}
 
