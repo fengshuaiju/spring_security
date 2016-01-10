@@ -1,17 +1,14 @@
 package com.feng.controller;
 
-import java.net.URLClassLoader;
-import java.util.Arrays;
-
-import org.jboss.jandex.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.feng.model.ModelEntity;
 import com.feng.service.ModelService;
@@ -24,40 +21,33 @@ public class ModelController {
 	private ModelService modelService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public String sayHello(){
-		Page<ModelEntity> say = modelService.findAll();
-		ModelEntity entity = modelService.findById(1L);
-		System.out.println(entity);
-		//model.addAttribute("say",say);
-		return "hello/hello";
+	public @ResponseBody Page<ModelEntity> sayHello(Pageable page){
+		Page<ModelEntity> pageList = modelService.findAll(page);
+		return pageList;
 	}
 	
 	@RequestMapping(value="/{modelId}",method=RequestMethod.GET)
-	private String getById(@PathVariable Long modelId){
+	private @ResponseBody ModelEntity getById(@PathVariable Long modelId){
+		modelId = 1l;
 		ModelEntity modelEntity = modelService.findById(modelId);
-		return "";
+		return modelEntity;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	private String create(){
-		ModelEntity modelEntity = new ModelEntity();
-		modelEntity = modelService.create(modelEntity);
-		return "";
+	private @ResponseBody ModelEntity create(@RequestBody ModelEntity entity){
+		entity = modelService.create(entity);
+		return entity;
 	}
 	
 	@RequestMapping(value="/{modelId}",method=RequestMethod.PUT)
-	private String update(@PathVariable Long modelId){
+	private @ResponseBody ModelEntity update(@PathVariable Long modelId){
 		ModelEntity modelEntity = modelService.update(modelId);
-		return null;
+		return modelEntity;
 	}
 	
 	@RequestMapping(value="/{modelId}",method=RequestMethod.DELETE)
-	private String delete(@PathVariable Long modelId){
+	private @ResponseBody String delete(@PathVariable Long modelId){
 		modelService.delete(modelId);
-		return null;
+		return "success";
 	}
-	public static void main(String[] args) {
-        URLClassLoader classLoader = (URLClassLoader)Main.class.getClassLoader();
-        System.out.println(Arrays.toString(classLoader.getURLs()));
-}
 }

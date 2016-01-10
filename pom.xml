@@ -184,6 +184,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			<artifactId>druid</artifactId>
 			<version>1.0.13</version>
 		</dependency>
+		<!-- 阿里fastJSON -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.7</version>
+		</dependency>
     
   </dependencies>
   

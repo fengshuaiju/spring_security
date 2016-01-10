@@ -10,16 +10,18 @@
 	<security:http auto-config="true" access-denied-page="/fail.jsp"><!-- 当访问被拒绝时，会转到403.jsp -->
 		<security:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/fail.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		
+		<!-- 制定登录页面等 -->
 		<security:form-login login-page="/login.jsp"  
              authentication-failure-url="/login.jsp?error=true"
              username-parameter="username"
              password-parameter="password"
              login-processing-url="/login.do"
              default-target-url="/index.jsp" />
-        <security:logout logout-success-url="/login.jsp" />  
-		
+             
+        <security:logout logout-success-url="/login.jsp" /> 
+        
     	<security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
+    	
     </security:http> 
    
       <security:authentication-manager alias="authenticationManager">

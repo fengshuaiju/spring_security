@@ -16,9 +16,9 @@ public class ModelServiceImpl implements ModelService{
 	private ModelRepositorie modelRepositorie;
 
 	@Override
-	public Page<ModelEntity> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public Page<ModelEntity> findAll(Pageable page) {
+		Page<ModelEntity> findAll = modelRepositorie.findAll(page);
+		return findAll;
 	}
 
 	@Override
@@ -28,53 +28,20 @@ public class ModelServiceImpl implements ModelService{
 
 	@Override
 	public ModelEntity create(ModelEntity modelEntity) {
-		// TODO Auto-generated method stub
-		return null;
+		return modelRepositorie.save(modelEntity);
 	}
 
 	@Override
 	public ModelEntity update(Long modelId) {
-		// TODO Auto-generated method stub
-		return null;
+		ModelEntity entity = modelRepositorie.findOne(modelId);
+		entity.setName("new_name_冯帅炬");
+		return modelRepositorie.save(entity);
 	}
 
 	@Override
 	public void delete(Long modelId) {
-		// TODO Auto-generated method stub
-		
+		ModelEntity entity = modelRepositorie.findOne(modelId);
+		entity.setRemovemark(true);
+		modelRepositorie.save(entity);
 	}
-	
-//	@Autowired
-//	private ModelRepositorie modelRepositorie;
-//
-//	@Override
-//	public Page<ModelEntity> findAll(Pageable page) {
-//		Page<ModelEntity> list = modelRepositorie.findAll(page);
-//		return list;
-//	}
-//
-//	@Override
-//	public ModelEntity findById(Long modelId) {
-//		ModelEntity modelEntity = modelRepositorie.findOne(modelId);
-//		return modelEntity;
-//	}
-//
-//	@Override
-//	public ModelEntity create(ModelEntity modelEntity) {
-//		modelEntity = modelRepositorie.save(modelEntity);
-//		return modelEntity;
-//	}
-//
-//	@Override
-//	public ModelEntity update(Long modelId) {
-//		ModelEntity modelEntity = modelRepositorie.findOne(modelId);
-//		modelEntity.setName("new Name");
-//		return modelEntity;
-//	}
-//
-//	@Override
-//	public void delete(Long modelId) {
-//		//modelRepositorie.delete(modelId);
-//	}
-
 }
