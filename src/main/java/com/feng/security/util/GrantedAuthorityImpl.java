@@ -1,4 +1,4 @@
-package com.feng.security.service;
+package com.feng.security.util;
 
 import org.springframework.security.core.GrantedAuthority;
 
