@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import com.feng.model.ModelEntity;
 
 public interface ModelService {
-	public Page<ModelEntity> findAll(Pageable page);
+	public Page<ModelEntity> findAll(String name, Pageable page);
 
 	public ModelEntity findById(Long modelId);
 

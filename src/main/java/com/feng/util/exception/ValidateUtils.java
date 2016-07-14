@@ -1,4 +1,4 @@
-package com.feng.exception.util;
+package com.feng.util.exception;
 
 public class ValidateUtils {
 

@@ -4,15 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.feng.exception.util.BusinessException;
-import com.feng.exception.util.ExceptionModel;
+import com.feng.util.exception.BusinessException;
+import com.feng.util.exception.ExceptionModel;
 
 public class BaseComponent {
-//	protected Logger loger;
-//	
-//	public BaseComponent(){
-//		loger = LoggerFactory.getLogger(this.getClass());
-//	}
+	protected Logger loger;
+	
+	public BaseComponent(){
+		loger = LoggerFactory.getLogger(this.getClass());
+	}
 	
 	/**
 	 * 捕获业务上的异常

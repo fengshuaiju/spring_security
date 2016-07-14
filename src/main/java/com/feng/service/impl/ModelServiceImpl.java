@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.feng.model.ModelEntity;
 import com.feng.repositories.ModelRepositorie;
 import com.feng.service.ModelService;
+import com.feng.util.repository.Criteria;
+import com.feng.util.repository.Restrictions;
 
 @Service
 public class ModelServiceImpl implements ModelService{
@@ -16,9 +18,13 @@ public class ModelServiceImpl implements ModelService{
 	private ModelRepositorie modelRepositorie;
 
 	@Override
-	public Page<ModelEntity> findAll(Pageable page) {
-		int a = 1/0;
-		Page<ModelEntity> findAll = modelRepositorie.findAll(page);
+	public Page<ModelEntity> findAll(String name , Pageable page) {
+		
+		Criteria<ModelEntity> criteria = new Criteria<ModelEntity>();
+		criteria.add(Restrictions.eq("name", name, true));
+		
+		Page<ModelEntity> findAll = modelRepositorie.findAll(criteria,page);
+		//int a = 1/0;
 		return findAll;
 	}
 
