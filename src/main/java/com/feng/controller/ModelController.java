@@ -1,5 +1,7 @@
 package com.feng.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,18 +10,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.feng.base.BaseComponent;
+import com.feng.exception.util.ExceptionCode;
+import com.feng.exception.util.ValidateUtils;
 import com.feng.model.ModelEntity;
 import com.feng.service.ModelService;
 
 @RestController
 @RequestMapping("/api/model")
-public class ModelController {
+public class ModelController extends BaseComponent{
 
+	Logger loger = LoggerFactory.getLogger(ModelController.class);
+	
 	@Autowired
 	private ModelService modelService;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public Page<ModelEntity> sayHello(Pageable page){
+		
+		loger.info("hello!!!!!!!!!!!!!!!Info");
+		
+		ValidateUtils.isTrue(true, ExceptionCode.UNKNOWN);
 		Page<ModelEntity> pageList = modelService.findAll(page);
 		return pageList;
 	}

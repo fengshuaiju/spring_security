@@ -17,6 +17,7 @@ public class ModelServiceImpl implements ModelService{
 
 	@Override
 	public Page<ModelEntity> findAll(Pageable page) {
+		int a = 1/0;
 		Page<ModelEntity> findAll = modelRepositorie.findAll(page);
 		return findAll;
 	}

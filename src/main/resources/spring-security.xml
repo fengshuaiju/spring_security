@@ -60,7 +60,10 @@
 	    <oauth2:password />
 	</oauth2:authorization-server>
 
-	<beans:bean id="tokenStore" class="org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore"/>
+	<!-- class="org.springframework.security.oauth2.provider.token.store.JdbcTokenStore/InMemoryTokenStore" -->
+	<beans:bean id="tokenStore" class="org.springframework.security.oauth2.provider.token.store.JdbcTokenStore">
+		<beans:constructor-arg ref="dataSource"/>
+	</beans:bean>
 	<beans:bean id="tokenServices" class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">  
 	    <beans:property name="tokenStore" ref="tokenStore"/>  
 	    <beans:property name="supportRefreshToken" value="true"/>
