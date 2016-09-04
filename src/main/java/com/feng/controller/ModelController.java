@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.feng.base.BaseComponent;
+import com.feng.base.JedisClient;
 import com.feng.model.ModelEntity;
 import com.feng.service.ModelService;
 import com.feng.util.exception.ExceptionCode;
@@ -23,12 +24,30 @@ public class ModelController extends BaseComponent{
 	@Autowired
 	private ModelService modelService;
 	
+	@Autowired
+	private JedisClient jedisClient;
+	
 	@RequestMapping(method=RequestMethod.GET)
 	public Page<ModelEntity> sayHello(@RequestParam(name="name",required=false) String name,
 			Pageable page){
 		
 		loger.info("hello!!!!!!!!!!!!!!!Info");
 		
+		jedisClient.hset("key1", "fielf1", "fengshuaiju");
+		
+		String hget = jedisClient.hget("key1", "fielf1");
+		
+		System.out.println(hget);
+		
+//		Long hdel = jedisClient.hdel("key1","fielf1");
+//		
+//		System.out.println(hdel);
+//        
+//		
+//		String hget1 = jedisClient.hget("key1", "fielf1");
+//		
+//        System.out.println(hget1);
+        
 		ValidateUtils.isTrue(true, ExceptionCode.UNKNOWN);
 		Page<ModelEntity> pageList = modelService.findAll(name,page);
 		return pageList;

@@ -1,0 +1,5 @@
+http://127.0.0.1:7070/ROOT/oauth/token?client_id=client&client_secret=secret&grant_type=password&username=fengshuaiju&password=123
+
+http://127.0.0.1:7070/ROOT/api/model?access_token=2c5cc258-febe-4234-85e0-6bbd412cb54c
+
+Authorization  bearer 2c5cc258-febe-4234-85e0-6bbd412cb54c
