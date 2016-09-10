@@ -231,6 +231,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		    <artifactId>jedis</artifactId>
 		    <version>${jedis-version}</version>
 		</dependency>
+		<!-- elasticsearch -->
+    	<dependency>
+		    <groupId>org.elasticsearch</groupId>
+		    <artifactId>elasticsearch</artifactId>
+		    <version>2.2.0</version>
+		</dependency>
     
     	<!-- google.guava -->
     	<dependency>

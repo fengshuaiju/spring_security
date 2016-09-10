@@ -22,13 +22,6 @@
 	
 	<!-- spring启动时扫描项目路径下的properties文件,后续用${key}方式取出对应值,这样可以代码解耦和，后续只需修改properties文件即可 -->
 	
-	
-	
-	
-	
-	
-    
-	
     <!-- 数据源配置,使用应用内的DBCP数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"  init-method="init" destroy-method="close">
         <!--property name="driverClassName" value="${db.driverClass}"/-->

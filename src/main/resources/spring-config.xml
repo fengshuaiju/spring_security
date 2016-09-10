@@ -21,13 +21,15 @@
     <context:annotation-config />  
     <context:component-scan base-package="com.feng" annotation-config="true"/>
     
+    <import resource="./spring-jpa.xml"/>
+    
     <bean id="jedisClient" class="com.feng.base.JedisClientImpl"/>
     <bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="destroy">
     	<constructor-arg name="poolConfig" ref="jedisPoolConfig" />
-        <constructor-arg name="host" value="127.0.0.1" />    
-        <constructor-arg name="port" value="6379" />    
-        <constructor-arg name="timeout" value="100000"/>
-    	<constructor-arg name= "password" value="fengshuaiju"/>
+        <constructor-arg name="host" value="${redis_host}" />    
+        <constructor-arg name="port" value="${redis_port}" />
+        <constructor-arg name="timeout" value="${redis_timeout}"/>
+    	<constructor-arg name= "password" value="${redis_password}"/>
     </bean>
     
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  

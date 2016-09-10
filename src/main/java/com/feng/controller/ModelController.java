@@ -1,5 +1,15 @@
 package com.feng.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.elasticsearch.client.Client;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.inject.Injector;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.node.Node;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,14 +49,14 @@ public class ModelController extends BaseComponent{
 		
 		System.out.println(hget);
 		
-//		Long hdel = jedisClient.hdel("key1","fielf1");
-//		
-//		System.out.println(hdel);
-//        
-//		
-//		String hget1 = jedisClient.hget("key1", "fielf1");
-//		
-//        System.out.println(hget1);
+		Long hdel = jedisClient.hdel("key1","fielf1");
+		
+		System.out.println(hdel);
+        
+		
+		String hget1 = jedisClient.hget("key1", "fielf1");
+		
+        System.out.println(hget1);
         
 		ValidateUtils.isTrue(true, ExceptionCode.UNKNOWN);
 		Page<ModelEntity> pageList = modelService.findAll(name,page);
