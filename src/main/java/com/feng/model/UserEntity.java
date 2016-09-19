@@ -1,8 +1,15 @@
 package com.feng.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name="user")
@@ -27,6 +34,10 @@ public class UserEntity extends BaseEntity{
 	
 	@Column(name="moble")
 	private String moble;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "userid")}, inverseJoinColumns = {@JoinColumn(name = "roleid")})
+	List<Role> roles = new ArrayList<Role>();
 	
 	public String getUserAccount() {
 		return userAccount;
@@ -57,6 +68,12 @@ public class UserEntity extends BaseEntity{
 	}
 	public void setMoble(String moble) {
 		this.moble = moble;
+	}
+	public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 	
 }

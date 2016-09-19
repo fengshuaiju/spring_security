@@ -7,4 +7,6 @@ import com.feng.model.UserEntity;
 
 public interface UserRepositorie extends PagingAndSortingRepository<UserEntity,Long>,JpaSpecificationExecutor<UserEntity>{
 
+	UserEntity findByUserAccount(String userAccount);
+
 }

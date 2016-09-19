@@ -5,6 +5,7 @@ package com.feng.security.util;
  */
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -15,11 +16,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MyUserDetailService implements UserDetailsService{
-
+	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String userAccount) throws UsernameNotFoundException {
 		
-		username = "fengshuaiju";
+		userAccount = "fengshuaiju";
 		String password = "123";
 		
 		//获取用户权限
@@ -27,7 +28,7 @@ public class MyUserDetailService implements UserDetailsService{
 		SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_ADMIN");
 		list.add(simpleGrantedAuthority);
 		
-		User user = new User(username,password,list);
+		User user = new User(userAccount,password,list);
 		
 		return user;
 	}

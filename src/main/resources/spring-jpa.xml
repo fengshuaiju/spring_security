@@ -64,6 +64,8 @@
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 		<property name="database" value="${database}"/>
 		<property name="showSql" value="${showSql}"/>
+		<!-- 是否自动建表 -->
+        <property name="generateDdl" value="${generateDdl}"/>
 	</bean>
 	
 	<!-- Jpa 事务管理器  -->

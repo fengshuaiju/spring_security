@@ -1,6 +1,5 @@
 package com.feng.security.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +8,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 @Component
 public class NormalAuthAuthenticationProvider implements AuthenticationProvider {
 	
-//	@Autowired
-//	private 
+	@Autowired
+	private NormalAuthValidation normalAuthValidation;
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -26,13 +24,17 @@ public class NormalAuthAuthenticationProvider implements AuthenticationProvider 
 		//登陆时，输入的密码
 		Object credentials = authentication.getCredentials();
 		
-		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-		SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_ADMIN");
-		list.add(simpleGrantedAuthority);
-		
-		UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(principal, credentials, list);
-		
-		return result;
+		if(principal !=null && credentials !=null){
+			//校验密码的正确性，并获取角色信息
+			List<GrantedAuthority> grantedAuthorityList = normalAuthValidation.validationAccess(principal.toString(),credentials.toString());
+			
+			UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(principal, credentials, grantedAuthorityList);
+			
+			return result;
+			
+		}else{
+			return null;
+		}
 	}
 
 	@Override

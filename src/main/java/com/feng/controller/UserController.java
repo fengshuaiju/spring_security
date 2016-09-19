@@ -2,8 +2,10 @@ package com.feng.controller;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.feng.model.UserEntity;
@@ -15,6 +17,20 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public UserEntity addUser(@PathVariable("id") Long userId){
+		
+		UserEntity user = userService.findById(userId);
+		
+		return user;
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public UserEntity addUser(@RequestParam(value="userAccount",required=false) String userAccount){
+		UserEntity user = userService.findByUserAccount(userAccount);
+		return user;
+	}
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public UserEntity addUser(){
