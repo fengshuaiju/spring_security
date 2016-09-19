@@ -89,9 +89,10 @@
 	    
 	</http>           
            
+    <beans:bean id = "normalAuthAuthenticationProvider" class="com.feng.security.util.NormalAuthAuthenticationProvider"/>
     <!-- 自定义认证器 -->
     <authentication-manager>
-	  <authentication-provider user-service-ref="myUserDetailService"/>
+	  <!-- <authentication-provider user-service-ref="myUserDetailService"/> -->
+	  <authentication-provider ref="normalAuthAuthenticationProvider"/>
 	</authentication-manager>
-           
 </beans:beans>

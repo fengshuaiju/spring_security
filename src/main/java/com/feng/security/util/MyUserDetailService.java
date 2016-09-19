@@ -1,8 +1,12 @@
 package com.feng.security.util;
 
+/**
+ * 该类用于自定义获取用户信息，userName是登录时的输入的唯一凭证
+ */
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,13 +19,13 @@ public class MyUserDetailService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		// String username, String password, Collection<? extends GrantedAuthority> authorities
-		
 		username = "fengshuaiju";
 		String password = "123";
+		
+		//获取用户权限
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-		GrantedAuthorityImpl grantedAuthorityImpl = new GrantedAuthorityImpl();
-		list.add(grantedAuthorityImpl);
+		SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_ADMIN");
+		list.add(simpleGrantedAuthority);
 		
 		User user = new User(username,password,list);
 		
