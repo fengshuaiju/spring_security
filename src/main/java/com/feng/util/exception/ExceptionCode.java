@@ -2,9 +2,12 @@ package com.feng.util.exception;
 
 public enum ExceptionCode {
 	
+	//COMMON
 	UNKNOWN("000000","you want is not get"),
-	USERNAME_PASSWORD_WRONG("000001","username or password is wrong");
 	
+	//USER
+	user_USERNAME_PASSWORD_WRONG("000001","username or password is wrong"),
+	user_USERID_IS_NULL("000002","user id is null");
 	
 	ExceptionCode(String errCode , String errMessage){
 		this.errCode = errCode;

@@ -33,5 +33,4 @@ public class MyUserDetailService implements UserDetailsService{
 		return user;
 	}
 
-	
 }

@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.feng.base.BaseComponent;
-import com.feng.base.JedisClient;
 import com.feng.model.ModelEntity;
 import com.feng.service.ModelService;
 import com.feng.util.exception.ExceptionCode;
 import com.feng.util.exception.ValidateUtils;
+import com.feng.util.redis.JedisClient;
 
 @RestController
 @RequestMapping("/api/model")

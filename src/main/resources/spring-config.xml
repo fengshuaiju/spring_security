@@ -23,7 +23,7 @@
     
     <import resource="./spring-jpa.xml"/>
     
-    <bean id="jedisClient" class="com.feng.base.JedisClientImpl"/>
+    <bean id="jedisClient" class="com.feng.util.redis.JedisClientImpl"/>
     <bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="destroy">
     	<constructor-arg name="poolConfig" ref="jedisPoolConfig" />
         <constructor-arg name="host" value="${redis_host}" />    

@@ -35,9 +35,9 @@ public class UserEntity extends BaseEntity{
 	@Column(name="moble")
 	private String moble;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "userid")}, inverseJoinColumns = {@JoinColumn(name = "roleid")})
-	List<Role> roles = new ArrayList<Role>();
+	private List<RoleEntity> roles = new ArrayList<RoleEntity>();
 	
 	public String getUserAccount() {
 		return userAccount;
@@ -69,10 +69,10 @@ public class UserEntity extends BaseEntity{
 	public void setMoble(String moble) {
 		this.moble = moble;
 	}
-	public List<Role> getRoles() {
+	public List<RoleEntity> getRoles() {
 		return roles;
 	}
-	public void setRoles(List<Role> roles) {
+	public void setRoles(List<RoleEntity> roles) {
 		this.roles = roles;
 	}
 	

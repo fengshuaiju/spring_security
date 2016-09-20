@@ -1,4 +1,4 @@
-package com.feng.base;
+package com.feng.util.redis;
 
 import java.util.List;
 import java.util.Map;

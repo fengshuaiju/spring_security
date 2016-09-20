@@ -1,13 +1,16 @@
 package com.feng.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @MappedSuperclass
@@ -32,6 +35,9 @@ public class BaseEntity implements Serializable {
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private DateTime updateTime;
+	
+	@Column(name = "removeMark")
+	private boolean removeMark = false;
 
 	public Long getId() {
 		return id;
@@ -41,20 +47,27 @@ public class BaseEntity implements Serializable {
 		this.id = id;
 	}
 
-	public DateTime getCreationTime() {
-		return creationTime;
+	public String getCreationTime() {
+		return creationTime == null ? null : creationTime.toString(ISODateTimeFormat.dateHourMinuteSecond());
 	}
 
 	public void setCreationTime(DateTime creationTime) {
 		this.creationTime = creationTime;
 	}
 
-	public DateTime getUpdateTime() {
-		return updateTime;
+	public String getUpdateTime() {
+		return updateTime == null ? null : updateTime.toString(ISODateTimeFormat.dateHourMinuteSecond());
 	}
 
 	public void setUpdateTime(DateTime updateTime) {
 		this.updateTime = updateTime;
 	}
-	
+
+	public boolean isRemoveMark() {
+		return removeMark;
+	}
+
+	public void setRemoveMark(boolean removeMark) {
+		this.removeMark = removeMark;
+	}
 }

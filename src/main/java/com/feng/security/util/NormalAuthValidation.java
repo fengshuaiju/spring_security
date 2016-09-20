@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import com.feng.model.Role;
+import com.feng.model.RoleEntity;
 import com.feng.model.UserEntity;
 import com.feng.service.UserService;
 import com.feng.util.exception.ExceptionCode;
@@ -29,10 +29,10 @@ public class NormalAuthValidation {
 		//验证密码是否正确
 		boolean isAccess = checkPassword(rawPassword,salt,password);
 		
-		ValidateUtils.isTrue(isAccess, ExceptionCode.USERNAME_PASSWORD_WRONG);
+		ValidateUtils.isTrue(isAccess, ExceptionCode.user_USERNAME_PASSWORD_WRONG);
 		
 		//查询用户的角色,创建角色信息List
-		List<Role> roles = user.getRoles();
+		List<RoleEntity> roles = user.getRoles();
 		List<GrantedAuthority> list = creatGrantedAuthoritys(roles);
 		
 		return list;
@@ -43,13 +43,13 @@ public class NormalAuthValidation {
 	 * @param roles
 	 * @return
 	 */
-	private List<GrantedAuthority> creatGrantedAuthoritys(List<Role> roles) {
+	private List<GrantedAuthority> creatGrantedAuthoritys(List<RoleEntity> roles) {
 		
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 		
 		if(roles!=null && roles.size()!=0){
-			for (Role role : roles) {
-				SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(role.getRoleName().toUpperCase());
+			for (RoleEntity role : roles) {
+				SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_" + role.getRoleName().toUpperCase());
 				list.add(simpleGrantedAuthority);
 			}
 		}else{//如果没有角色，默认分配一个用户角色
@@ -74,4 +74,11 @@ public class NormalAuthValidation {
 		return password.equals(encodePassword);
 	}
 	
+	public static void main(String[] args) {
+		String rawPassword = "fengshuaiju";
+		String salt = "kdw5dkwesiws";
+		ShaPasswordEncoder encoder = new ShaPasswordEncoder();
+		String encodePassword = encoder.encodePassword(rawPassword, salt);
+		System.out.println(encodePassword);
+	}
 }

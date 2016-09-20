@@ -1,4 +1,4 @@
-package com.feng.base;
+package com.feng.util.elastic;
 
 import java.io.IOException;
 
