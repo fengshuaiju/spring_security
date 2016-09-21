@@ -1,6 +1,6 @@
 package com.feng.service;
 
-import com.feng.model.UserEntity;
+import com.feng.entity.UserEntity;
 
 public interface UserService {
 

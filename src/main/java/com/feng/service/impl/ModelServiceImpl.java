@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.feng.model.ModelEntity;
+import com.feng.entity.ModelEntity;
 import com.feng.repositories.ModelRepositorie;
 import com.feng.service.ModelService;
 import com.feng.util.repository.Criteria;

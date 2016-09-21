@@ -1,14 +1,15 @@
-package com.feng.model;
+package com.feng.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name="role")
@@ -27,11 +28,11 @@ public class RoleEntity extends BaseEntity{
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "roleid") }, inverseJoinColumns = { @JoinColumn(name = "userid") })
-	private List<UserEntity> users = new ArrayList<UserEntity>();
+	private Set<UserEntity> users = new HashSet<UserEntity>();
 
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "role_menu", joinColumns = {@JoinColumn(name = "roleid")}, inverseJoinColumns = {@JoinColumn(name = "menuid")})
-	private List<MenuEntity> menus = new ArrayList<MenuEntity>();
+	private Set<MenuEntity> menus = new HashSet<MenuEntity>();
 	
 	public String getRoleName() {
 		return roleName;
@@ -49,12 +50,20 @@ public class RoleEntity extends BaseEntity{
 		this.note = note;
 	}
 
-	public List<UserEntity> getUsers() {
+	public Set<UserEntity> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<UserEntity> users) {
+	public void setUsers(Set<UserEntity> users) {
 		this.users = users;
+	}
+
+	public Set<MenuEntity> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(Set<MenuEntity> menus) {
+		this.menus = menus;
 	}
 	
 }

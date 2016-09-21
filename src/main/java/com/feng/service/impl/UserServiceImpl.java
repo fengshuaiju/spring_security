@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.feng.base.BaseService;
-import com.feng.model.UserEntity;
+import com.feng.entity.UserEntity;
 import com.feng.repositories.UserRepositorie;
 import com.feng.service.UserService;
 

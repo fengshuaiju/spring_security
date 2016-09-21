@@ -1,15 +1,15 @@
-package com.feng.model;
+package com.feng.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name="user")
@@ -37,7 +37,7 @@ public class UserEntity extends BaseEntity{
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "userid")}, inverseJoinColumns = {@JoinColumn(name = "roleid")})
-	private List<RoleEntity> roles = new ArrayList<RoleEntity>();
+	private Set<RoleEntity> roles = new HashSet<RoleEntity>();
 	
 	public String getUserAccount() {
 		return userAccount;
@@ -69,11 +69,10 @@ public class UserEntity extends BaseEntity{
 	public void setMoble(String moble) {
 		this.moble = moble;
 	}
-	public List<RoleEntity> getRoles() {
+	public Set<RoleEntity> getRoles() {
 		return roles;
 	}
-	public void setRoles(List<RoleEntity> roles) {
+	public void setRoles(Set<RoleEntity> roles) {
 		this.roles = roles;
 	}
-	
 }

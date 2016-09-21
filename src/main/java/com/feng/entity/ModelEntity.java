@@ -1,4 +1,4 @@
-package com.feng.model;
+package com.feng.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

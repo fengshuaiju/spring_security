@@ -3,7 +3,7 @@ package com.feng.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.feng.model.ModelEntity;
+import com.feng.entity.ModelEntity;
 
 public interface ModelService {
 	public Page<ModelEntity> findAll(String name, Pageable page);

@@ -57,7 +57,7 @@
 		<property name="dataSource" ref="dataSource"/>
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
 		<property name="persistenceUnitName" value="Spring_Security"/>
-		<property name="packagesToScan" value="com.feng.model"/>
+		<property name="packagesToScan" value="com.feng.entity"/>
 	</bean>
 	     
 	<bean id="jpaVendorAdapter" 

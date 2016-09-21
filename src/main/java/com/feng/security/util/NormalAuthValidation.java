@@ -2,6 +2,7 @@ package com.feng.security.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
@@ -9,8 +10,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import com.feng.model.RoleEntity;
-import com.feng.model.UserEntity;
+import com.feng.entity.RoleEntity;
+import com.feng.entity.UserEntity;
 import com.feng.service.UserService;
 import com.feng.util.exception.ExceptionCode;
 import com.feng.util.exception.ValidateUtils;
@@ -32,7 +33,7 @@ public class NormalAuthValidation {
 		ValidateUtils.isTrue(isAccess, ExceptionCode.user_USERNAME_PASSWORD_WRONG);
 		
 		//查询用户的角色,创建角色信息List
-		List<RoleEntity> roles = user.getRoles();
+		Set<RoleEntity> roles = user.getRoles();
 		List<GrantedAuthority> list = creatGrantedAuthoritys(roles);
 		
 		return list;
@@ -43,7 +44,7 @@ public class NormalAuthValidation {
 	 * @param roles
 	 * @return
 	 */
-	private List<GrantedAuthority> creatGrantedAuthoritys(List<RoleEntity> roles) {
+	private List<GrantedAuthority> creatGrantedAuthoritys(Set<RoleEntity> roles) {
 		
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 		

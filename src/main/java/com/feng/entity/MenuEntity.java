@@ -1,14 +1,17 @@
-package com.feng.model;
+package com.feng.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -40,10 +43,19 @@ public class MenuEntity extends BaseEntity{
 	@Column(name="menuNote")
 	private String menuNote;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name = "role_menu", joinColumns = { @JoinColumn(name = "menuid") }, inverseJoinColumns = { @JoinColumn(name = "roleid") })
-	private List<RoleEntity> roles = new ArrayList<RoleEntity>();
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "role_menu", joinColumns = { @JoinColumn(name = "menuid") }, 
+		inverseJoinColumns = {@JoinColumn(name = "roleid") })
+	private Set<RoleEntity> roles = new HashSet<RoleEntity>();
 
+	//自身一对多关联
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+	@JoinColumn(name = "fid")
+	private MenuEntity menu;
+
+	@OneToMany(mappedBy = "menu",fetch=FetchType.EAGER)
+	private Set<MenuEntity> menus = new HashSet<>();
+	
 	public String getMenuName() {
 		return menuName;
 	}
@@ -84,12 +96,28 @@ public class MenuEntity extends BaseEntity{
 		this.menuNote = menuNote;
 	}
 
-	public List<RoleEntity> getRoles() {
+	public Set<RoleEntity> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<RoleEntity> roles) {
+	public void setRoles(Set<RoleEntity> roles) {
 		this.roles = roles;
+	}
+
+	public MenuEntity getMenu() {
+		return menu;
+	}
+
+	public void setMenu(MenuEntity menu) {
+		this.menu = menu;
+	}
+
+	public Set<MenuEntity> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(Set<MenuEntity> menus) {
+		this.menus = menus;
 	}
 	
 }
