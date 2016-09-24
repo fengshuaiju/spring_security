@@ -1,5 +1,7 @@
 package com.feng.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,14 @@ public class MenuServiceImpl extends BaseService implements MenuService {
 		MenuEntity menuEntity = menuRepositorie.findOne(menuId);
 		
 		return menuEntity;
+	}
+
+	@Override
+	public List<MenuEntity> findAllGreadFirstMenus() {
+		
+		List<MenuEntity> list = menuRepositorie.findAllGreadFirstMenus();
+		
+		return list;
 	}
 
 }

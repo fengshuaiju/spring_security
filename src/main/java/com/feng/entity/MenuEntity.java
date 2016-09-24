@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -54,6 +55,7 @@ public class MenuEntity extends BaseEntity{
 	private MenuEntity menu;
 
 	@OneToMany(mappedBy = "menu",fetch=FetchType.EAGER)
+	@OrderBy("menuRank desc")
 	private Set<MenuEntity> menus = new HashSet<>();
 	
 	public String getMenuName() {

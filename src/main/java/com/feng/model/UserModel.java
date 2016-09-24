@@ -1,10 +1,12 @@
 package com.feng.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import com.feng.entity.MenuEntity;
-import com.feng.entity.RoleEntity;
+import org.springframework.beans.BeanUtils;
+
 import com.feng.entity.UserEntity;
 
 public class UserModel {
@@ -17,7 +19,7 @@ public class UserModel {
 	
 	private Set<RoleModel> roles = new HashSet<>();
 	
-	private Set<MenuModel> menus = new HashSet<>();
+	private List<MenuModel> menus = new ArrayList<>();
 
 	public UserModel(){
 	}
@@ -26,14 +28,15 @@ public class UserModel {
 		this.userAccount = userEntity.getUserAccount();
 		this.nickName = userEntity.getNickName();
 		this.moble = userEntity.getMoble();
-		Set<RoleEntity> roleEntitys = userEntity.getRoles();
-		for (RoleEntity roleEntity : roleEntitys) {
-			roles.add(new RoleModel(roleEntity));
-			Set<MenuEntity> menuEntitys = roleEntity.getMenus();
-			for (MenuEntity menuEntity : menuEntitys) {
-				menus.add(new MenuModel(menuEntity));
-			}
-		}
+	}
+	
+	public UserEntity getUserEntity(UserModel user) {
+		
+		UserEntity userEntity = new UserEntity();
+		
+		BeanUtils.copyProperties(user, userEntity);
+		
+		return userEntity;
 	}
 
 	public String getUserAccount() {
@@ -68,12 +71,13 @@ public class UserModel {
 		this.roles = roles;
 	}
 
-	public Set<MenuModel> getMenus() {
+	public List<MenuModel> getMenus() {
 		return menus;
 	}
 
-	public void setMenus(Set<MenuModel> menus) {
+	public void setMenus(List<MenuModel> menus) {
 		this.menus = menus;
 	}
+
 	
 }

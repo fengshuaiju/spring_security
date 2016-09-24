@@ -1,6 +1,7 @@
 package com.feng.service;
 
 import com.feng.entity.UserEntity;
+import com.feng.model.UserModel;
 
 public interface UserService {
 
@@ -24,4 +25,23 @@ public interface UserService {
 	 * @return
 	 */
 	UserEntity findByUserAccount(String userAccount);
+	
+	/**
+	 * 获取当前用户
+	 * @return
+	 */
+	UserModel getCurrentUser();
+	
+	/**
+	 * 获取当前用户详细信息
+	 * @return
+	 */
+	UserModel getCurrentUserDetails();
+
+	/**
+	 * 创建用户
+	 * @param user
+	 * @return
+	 */
+	UserEntity creatUser(UserModel user);
 }

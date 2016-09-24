@@ -28,7 +28,7 @@
 	</beans:bean>
 	<oauth2:client-details-service id="clientDetailsService">
 	       <oauth2:client secret="secret"  client-id="client"  scope="read,write,trust"
-	       access-token-validity="${access-token-validity}"
+	       access-token-validity="${access-token-validity}" 
 	       authorized-grant-types="password,authorization_code,refresh_token,implicit"/>
 	</oauth2:client-details-service>
 
@@ -55,7 +55,7 @@
 
 	<oauth2:authorization-server client-details-service-ref="clientDetailsService" 
 			token-services-ref="tokenServices" user-approval-handler-ref="oauthUserApprovalHandler" >  
-	    <oauth2:authorization-code />
+	    <!-- <oauth2:authorization-code /> -->
 	    <oauth2:implicit />
 	    <oauth2:refresh-token />
 	    <oauth2:client-credentials />
@@ -88,6 +88,10 @@
 	    <access-denied-handler ref="oauth2AccessDeniedHandler" />
 	    
 	    <!-- 以下定义URL的访问权限 -->
+	    <!-- 细粒度往上排，粗粒度往下排 -->
+	    <!-- 
+	    <intercept-url pattern="/api/user/**" access="ROLE_SUPER_ADMIN" method="POST"/>
+	     -->
 	    <intercept-url pattern="/**" access="ROLE_ADMIN" />
 	    
 	</http>           

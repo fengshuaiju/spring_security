@@ -1,6 +1,7 @@
 package com.feng.model;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
@@ -8,6 +9,8 @@ import org.springframework.beans.BeanUtils;
 import com.feng.entity.MenuEntity;
 
 public class MenuModel {
+	
+	private Long id;
 
 	private String menuName;
 
@@ -19,19 +22,21 @@ public class MenuModel {
 
 	private String menuNote;
 	
-	private Set<MenuModel> meuns = new HashSet<>();
+	private List<MenuModel> meuns = new ArrayList<>();
 	
 	public MenuModel(){
 		
 	}
 	
-	public MenuModel(MenuEntity menuEntity){
-		BeanUtils.copyProperties(menuEntity, this);
-		Set<MenuEntity> nextGrades = menuEntity.getMenus();
-		if(nextGrades != null && nextGrades.size()>0){
-			this.meuns.clear();
-			for (MenuEntity nextGrade : nextGrades) {
-				meuns.add(new MenuModel(nextGrade));
+	public MenuModel(MenuEntity menuEntity) {
+		if (!menuEntity.isRemoveMark()) {
+			BeanUtils.copyProperties(menuEntity, this);
+			Set<MenuEntity> nextGrades = menuEntity.getMenus();
+			if (nextGrades != null && nextGrades.size() > 0) {
+				this.meuns.clear();
+				for (MenuEntity nextGrade : nextGrades) {
+					meuns.add(new MenuModel(nextGrade));
+				}
 			}
 		}
 	}
@@ -76,12 +81,20 @@ public class MenuModel {
 		this.menuNote = menuNote;
 	}
 
-	public Set<MenuModel> getMeuns() {
+	public List<MenuModel> getMeuns() {
 		return meuns;
 	}
 
-	public void setMeuns(Set<MenuModel> meuns) {
+	public void setMeuns(List<MenuModel> meuns) {
 		this.meuns = meuns;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**
@@ -91,6 +104,7 @@ public class MenuModel {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((menuGrade == null) ? 0 : menuGrade.hashCode());
 		result = prime * result + ((menuName == null) ? 0 : menuName.hashCode());
 		result = prime * result + ((menuNote == null) ? 0 : menuNote.hashCode());
@@ -108,6 +122,11 @@ public class MenuModel {
 		if (getClass() != obj.getClass())
 			return false;
 		MenuModel other = (MenuModel) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (menuGrade == null) {
 			if (other.menuGrade != null)
 				return false;

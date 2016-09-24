@@ -1,10 +1,15 @@
 package com.feng.repositories;
 
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
+
+import com.feng.base.BaseRepositorie;
 import com.feng.entity.MenuEntity;
 
-public interface MenuRepositorie extends PagingAndSortingRepository<MenuEntity,Long>,JpaSpecificationExecutor<MenuEntity>{
+public interface MenuRepositorie extends BaseRepositorie<MenuEntity>{
+
+	@Query(value="FROM MenuEntity WHERE menuGrade = 1 AND removeMark = false ORDER BY menuRank desc")
+	List<MenuEntity> findAllGreadFirstMenus();
 
 }

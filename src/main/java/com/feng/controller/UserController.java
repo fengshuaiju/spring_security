@@ -1,6 +1,5 @@
 package com.feng.controller;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +21,7 @@ public class UserController extends BaseController{
 	@Autowired
 	private UserService userService;
 	
+	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public UserModel addUser(@PathVariable("id") Long userId){
 		
@@ -32,6 +32,8 @@ public class UserController extends BaseController{
 		
 		UserModel userModel = new UserModel(user);
 		
+		//UserModel userModel = userService.getCurrentUserDetails();
+		
 		return userModel;
 	}
 	
@@ -41,24 +43,16 @@ public class UserController extends BaseController{
 		loger.debug("find user by userAccount %s ", userAccount);
 		UserEntity user = userService.findByUserAccount(userAccount);
 		
-		
-		
 		return user;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public UserEntity addUser(UserEntity user_){
+	public UserModel addUser(UserModel user){
 		
-		UserEntity user = new UserEntity();
-		user.setCreationTime(DateTime.now());
-		user.setMoble("18930061430");
-		user.setNickName("冯帅炬");
-		user.setPassword("fengshuaiju");
-		user.setSalt("fengshuaiju");
-		user.setUpdateTime(DateTime.now());
-		user.setUserAccount("fengshuaiju");
+		ValidateUtils.notNull(user, ExceptionCode.user_USERID_IS_NULL);
+		UserEntity userEntity = userService.creatUser(user);
 		
-		user = userService.add(user);
+		user = new UserModel(userEntity);
 		
 		return user;
 	}
