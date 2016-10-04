@@ -52,5 +52,5 @@
 	<task:scheduler id="scheduler" pool-size="10" />
 	<task:executor id="threadPoolTaskExecutor" pool-size="10" />
 	<task:executor id="executorWithPoolSizeRange" pool-size="5-25" queue-capacity="100" />
-    
+
 </beans>

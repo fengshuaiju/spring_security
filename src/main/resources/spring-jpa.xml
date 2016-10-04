@@ -5,6 +5,7 @@
    xmlns:aop="http://www.springframework.org/schema/aop"
    xmlns:context="http://www.springframework.org/schema/context"
    xmlns:tx="http://www.springframework.org/schema/tx"
+   xmlns:util="http://www.springframework.org/schema/util"
    xsi:schemaLocation="http://www.springframework.org/schema/beans
      http://www.springframework.org/schema/beans/spring-beans.xsd
      http://www.springframework.org/schema/data/jpa
@@ -14,7 +15,10 @@
      http://www.springframework.org/schema/tx
      http://www.springframework.org/schema/tx/spring-tx.xsd
      http://www.springframework.org/schema/context 
-     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     
+     http://www.springframework.org/schema/util
+     http://www.springframework.org/schema/util/spring-util-3.1.xsd">
      
     <context:component-scan base-package="com.feng"/>
 	
@@ -77,6 +81,7 @@
     
     <!-- 根据不同的Spring.profile加载不同的文件 -->
     <beans profile="local"> 
+    	<util:properties id="settings" location="classpath:propertie/local.properties"/>
 		<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 	        <property name="locations">
 	            <list>
@@ -88,6 +93,7 @@
 	</beans>
 	
 	<beans profile="product"> 
+		<util:properties id="settings" location="classpath:propertie/product.properties"/>
 		<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 	        <property name="locations">
 	            <list>

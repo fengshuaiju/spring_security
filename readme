@@ -3,3 +3,5 @@ http://127.0.0.1:7070/ROOT/oauth/token?client_id=client&client_secret=secret&gra
 http://127.0.0.1:7070/ROOT/api/model?access_token=2c5cc258-febe-4234-85e0-6bbd412cb54c
 
 Authorization  bearer 2c5cc258-febe-4234-85e0-6bbd412cb54c
+
+rewrelic_key e547f5f3bc44a7fb7e88cc1aee3c4ef340fdfaa1

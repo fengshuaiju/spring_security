@@ -4,10 +4,11 @@ public enum ExceptionCode {
 	
 	//COMMON
 	UNKNOWN("000000","you want is not get"),
+	UPLOAD_FAIL("000001","upload fail is fail"),
 	
 	//USER
-	user_USERNAME_PASSWORD_WRONG("000001","username or password is wrong"),
-	user_USERID_IS_NULL("000002","user id is null");
+	user_USERNAME_PASSWORD_WRONG("001001","username or password is wrong"),
+	user_USERID_IS_NULL("001002","user id is null");
 	
 	ExceptionCode(String errCode , String errMessage){
 		this.errCode = errCode;
