@@ -1,4 +1,4 @@
-FROM fengshuaiju/tomcat:latest
+FROM w1yd/tomcat7:jdk7-newrelic
 
 MAINTAINER shuaijufeng "1179694483@qq.com"
 
