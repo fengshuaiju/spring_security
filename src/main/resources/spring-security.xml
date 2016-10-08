@@ -79,22 +79,25 @@
 
 	<oauth2:resource-server id="mobileResourceServer" resource-id="mobile-resource" token-services-ref="tokenServices" />
     
-    <!-- 系统url权限定义 -->   
-	<http pattern="/**" create-session="never"
+    
+	<!-- 系统url权限定义 -->   
+	<http auto-config='true' pattern="/**" create-session="never"
 	        entry-point-ref="oauth2AuthenticationEntryPoint"
 	        access-decision-manager-ref="oauth2AccessDecisionManager">
-	    <anonymous enabled="false" />
-	    <custom-filter ref="mobileResourceServer" before="PRE_AUTH_FILTER" />
+	    <anonymous enabled="true" /><!-- 是否允许匿名访问 -->
+	    <!--
+ 	    <custom-filter ref="mobileResourceServer" before="PRE_AUTH_FILTER" />
 	    <access-denied-handler ref="oauth2AccessDeniedHandler" />
+	    -->
 	    
 	    <!-- 以下定义URL的访问权限 -->
-	    <!-- 细粒度往上排，粗粒度往下排 -->
-	    <!-- 
-	    <intercept-url pattern="/api/user/**" access="ROLE_SUPER_ADMIN" method="POST"/>
-	     -->
-	    <intercept-url pattern="/**" access="ROLE_ADMIN" />
+	    <!-- 微信服务器回调，放开权限 -->
+	    <intercept-url pattern="/api/wechat/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 	    
-	</http>           
+	    <!-- 细粒度往上排，粗粒度往下排 -->
+	    <intercept-url pattern="/api/**" access="ROLE_SUPER_ADMIN"/>
+	    
+	</http>      
            
     <beans:bean id = "normalAuthAuthenticationProvider" class="com.feng.security.util.NormalAuthAuthenticationProvider"/>
     <!-- 自定义认证器 -->

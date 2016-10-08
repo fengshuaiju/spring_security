@@ -8,7 +8,11 @@ public enum ExceptionCode {
 	
 	//USER
 	user_USERNAME_PASSWORD_WRONG("001001","username or password is wrong"),
-	user_USERID_IS_NULL("001002","user id is null");
+	user_USERID_IS_NULL("001002","user id is null"),
+	
+	//weixin
+	wx_EVENT_MESSAGE_IS_NULL("002001","event message is null"),
+	wx_MESSAGE_NOT_FROM_WEIXIN("002002","message not from weixin");
 	
 	ExceptionCode(String errCode , String errMessage){
 		this.errCode = errCode;
