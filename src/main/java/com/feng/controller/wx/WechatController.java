@@ -1,6 +1,5 @@
 package com.feng.controller.wx;
 
-import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -16,11 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.feng.base.BaseController;
 import com.feng.model.wx.EventMessage;
-import com.feng.model.wx.TuLingReply;
 import com.feng.service.WeichatReplyService;
 import com.feng.util.exception.ExceptionCode;
 import com.feng.util.exception.ValidateUtils;
-import com.feng.util.weichat.TuLingHelper;
 import com.feng.util.weichat.WechatSecretUtils;
 
 @RestController
@@ -72,6 +69,8 @@ public class WechatController extends BaseController{
 	public void eventMessage(@RequestParam HashMap<String, String> values,
 			@RequestBody EventMessage eventMessage, HttpServletResponse response) throws Exception {
 		
+		System.out.println("eventMessage:"+JSON.toJSONString(eventMessage));
+		
 		ValidateUtils.notNull(eventMessage, ExceptionCode.wx_EVENT_MESSAGE_IS_NULL);
 		
 		ValidateUtils.isTrue(isFromWeixin(values), ExceptionCode.wx_MESSAGE_NOT_FROM_WEIXIN);
@@ -85,6 +84,10 @@ public class WechatController extends BaseController{
 			weichatReplyService.textReply(eventMessage,response);
 			break;
 
+		case "event"://事件
+			weichatReplyService.eventReply(eventMessage,response);
+			break;
+			
 		default:
 			weichatReplyService.defaultReply(eventMessage,response);
 			break;

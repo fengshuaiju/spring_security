@@ -20,4 +20,11 @@ public interface WeichatReplyService {
 	 */
 	void defaultReply(EventMessage eventMessage, HttpServletResponse response);
 
+	/**
+	 * 事件类型回复
+	 * @param eventMessage
+	 * @param response
+	 */
+	void eventReply(EventMessage eventMessage, HttpServletResponse response);
+
 }
