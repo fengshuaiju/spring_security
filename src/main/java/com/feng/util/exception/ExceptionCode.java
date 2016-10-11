@@ -12,7 +12,8 @@ public enum ExceptionCode {
 	
 	//weixin
 	wx_EVENT_MESSAGE_IS_NULL("002001","event message is null"),
-	wx_MESSAGE_NOT_FROM_WEIXIN("002002","message not from weixin");
+	wx_MESSAGE_NOT_FROM_WEIXIN("002002","message not from weixin"),
+	wx_TOKEN_ERROR("002003", "get wechat access_token error");
 	
 	ExceptionCode(String errCode , String errMessage){
 		this.errCode = errCode;

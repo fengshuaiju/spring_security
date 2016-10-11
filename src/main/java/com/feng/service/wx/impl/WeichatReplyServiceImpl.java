@@ -1,20 +1,25 @@
-package com.feng.service.impl;
+package com.feng.service.wx.impl;
 
 import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.feng.base.BaseService;
 import com.feng.model.wx.EventMessage;
 import com.feng.model.wx.EventMessageType;
 import com.feng.model.wx.TuLingReply;
-import com.feng.service.WeichatReplyService;
+import com.feng.service.wx.WechatRequestHelper;
+import com.feng.service.wx.WeichatReplyService;
 import com.feng.util.weichat.TuLingHelper;
 
 @Service
 public class WeichatReplyServiceImpl extends BaseService implements WeichatReplyService {
+	
+	@Autowired
+	private WechatRequestHelper wechatRequestHelper;
 
 	@Override
 	public void textReply(EventMessage eventMessage, HttpServletResponse response) {
@@ -25,6 +30,7 @@ public class WeichatReplyServiceImpl extends BaseService implements WeichatReply
 		String content = eventMessage.getContent();
 		TuLingReply tlReply = TuLingHelper.getTlReply(content);
 
+		//目前只支持文本回复一种
 		if (TuLingReply.RETURN_CODE.equals(tlReply.getCode())) {
 			replayMessage = tlReply.getText();
 		} else {
@@ -39,7 +45,7 @@ public class WeichatReplyServiceImpl extends BaseService implements WeichatReply
 	public void defaultReply(EventMessage eventMessage,HttpServletResponse response) {
 
 		// 返回给服务器的信息
-		String replayMessage = "小静不想理你，并向你扔了一只狗！！！ /::D";
+		String replayMessage = "小静不想理你，并向你扔了一只狗！！！/::D";
 		
 		replyTextMessage(eventMessage,response,replayMessage);
 	}
@@ -55,7 +61,7 @@ public class WeichatReplyServiceImpl extends BaseService implements WeichatReply
 			String fromUserName = eventMessage.getFromUserName();
 			System.out.println(fromUserName);
 			
-			String subscribeReply = "谢谢你关注我，么么哒！！！";
+			String subscribeReply = "谢谢你关注我，么么哒！！！/::*";
 			replyTextMessage(eventMessage,response,subscribeReply);
 			
 			break;
@@ -71,6 +77,11 @@ public class WeichatReplyServiceImpl extends BaseService implements WeichatReply
 		default:
 			break;
 		}
+	}
+	
+	@Override
+	public void initiativeTextReply(String openId, String text) {
+		wechatRequestHelper.initiativeTextReply(openId, text);
 	}
 	
 	/**

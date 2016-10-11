@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.feng.base.BaseController;
 import com.feng.model.wx.EventMessage;
-import com.feng.service.WeichatReplyService;
+import com.feng.service.wx.WeichatReplyService;
 import com.feng.util.exception.ExceptionCode;
 import com.feng.util.exception.ValidateUtils;
 import com.feng.util.weichat.WechatSecretUtils;
@@ -64,12 +64,9 @@ public class WechatController extends BaseController{
         return Boolean.FALSE;
     }
 	
-	
 	@RequestMapping(value = "/event", method=RequestMethod.POST)
 	public void eventMessage(@RequestParam HashMap<String, String> values,
 			@RequestBody EventMessage eventMessage, HttpServletResponse response) throws Exception {
-		
-		System.out.println("eventMessage:"+JSON.toJSONString(eventMessage));
 		
 		ValidateUtils.notNull(eventMessage, ExceptionCode.wx_EVENT_MESSAGE_IS_NULL);
 		
@@ -92,17 +89,6 @@ public class WechatController extends BaseController{
 			weichatReplyService.defaultReply(eventMessage,response);
 			break;
 		}
-		
 	}
 		
-//		获取accessToken
-//		String getAccessToken = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxd5862fe4b5068c5d&secret=ff985e2b30b9d7b37ed9bd9556a368bc";
-//
-//		String body2 = HttpRequest.get(getAccessToken).body();
-//		
-//		JSONObject parseObject = JSONObject.parseObject(body2);
-//
-//		String ACCESS_TOKEN = parseObject.getString("access_token");
-//		
-	
 }

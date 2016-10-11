@@ -6,10 +6,17 @@ public class BusinessException extends RuntimeException{
 	
 	private String errMessage;
 	private String errCode;
+	private String info;
 	
 	public BusinessException(){
 	}
 
+	public BusinessException(ExceptionCode exceptionCode,String info){
+		this.errMessage = exceptionCode.getErrMessage();
+		this.errCode = exceptionCode.getErrCode();
+		this.info = info;
+	}
+	
 	public BusinessException(ExceptionCode exceptionCode){
 		this.errMessage = exceptionCode.getErrMessage();
 		this.errCode = exceptionCode.getErrCode();
@@ -34,6 +41,13 @@ public class BusinessException extends RuntimeException{
 
 	public void setErrCode(String errCode) {
 		this.errCode = errCode;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 }

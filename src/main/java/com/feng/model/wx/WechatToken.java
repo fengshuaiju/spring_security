@@ -1,5 +1,7 @@
 package com.feng.model.wx;
 
+import org.joda.time.DateTime;
+
 /**
  * 微信公众号token
  * @author Administrator
@@ -35,6 +37,13 @@ public class WechatToken {
 	}
 	public void setExpiresTimeMillis(Long expiresTimeMillis) {
 		this.expiresTimeMillis = expiresTimeMillis;
+	}
+	/**
+	 * token是否过期
+	 * @return
+	 */
+	public boolean isExpires() {
+		return DateTime.now().getMillis() >= this.expiresTimeMillis ;
 	}
 	
 }
