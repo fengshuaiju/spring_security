@@ -6,6 +6,8 @@ WORKDIR /code
 
 RUN echo "Asia/Shanghai" > /etc/timezone && \
         dpkg-reconfigure -f noninteractive tzdata
+        
+RUN source /etc/profile
 
 RUN rm -r /tomcat/webapps/*
 
