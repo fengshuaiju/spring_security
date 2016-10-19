@@ -1,4 +1,4 @@
-FROM fengshuaiju/tomcat:latest
+FROM fengshuaiju/tomcat7:v1
 
 MAINTAINER shuaijufeng "1179694483@qq.com"
 
