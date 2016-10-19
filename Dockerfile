@@ -1,4 +1,4 @@
-FROM fengshuaiju/tomcat7:v1
+FROM fengshuaiju/tomcat:latest
 
 MAINTAINER shuaijufeng "1179694483@qq.com"
 
@@ -7,7 +7,7 @@ WORKDIR /code
 RUN echo "Asia/Shanghai" > /etc/timezone && \
         dpkg-reconfigure -f noninteractive tzdata
 
-RUN rm -rf /tomcat/webapps/*
+RUN rm -r /usr/local/tomcat/webapps/*
 
 ADD pom.xml /code/pom.xml 
 RUN mvn dependency:resolve 
