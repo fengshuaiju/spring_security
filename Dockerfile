@@ -7,7 +7,7 @@ WORKDIR /code
 RUN echo "Asia/Shanghai" > /etc/timezone && \
         dpkg-reconfigure -f noninteractive tzdata
 
-RUN rm -r /usr/local/tomcat/webapps/*
+RUN rm -rf /tomcat/webapps/*
 
 ADD pom.xml /code/pom.xml 
 RUN mvn dependency:resolve 
